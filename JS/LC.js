@@ -233,3 +233,34 @@ var isValid = function(s) {
     
     return true;
 };
+
+/**
+ * Given a linked list, determine if it has a cycle in it.
+To represent a cycle in the given linked list, we use an integer pos
+which represents the position (0-indexed) in the linked list where tail connects to.
+If pos is -1, then there is no cycle in the linked list.
+ */
+var hasCycle = function(head) {
+    let position = 0;
+    while(head){
+        head.pos = position;
+        head = head.next;
+        if(head && head.pos <= position)
+            return true;
+        position++;
+    }
+    return false;
+};
+
+//Using Set
+var hasCycleSet = function(head){
+    let nodes = new Set();
+    while(head){
+        if(set.has(head))
+            return true;
+        else
+            set.add(head);
+        head = head.next;
+    }
+    return false;
+}
