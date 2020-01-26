@@ -264,3 +264,73 @@ var hasCycleSet = function(head){
     }
     return false;
 }
+
+//Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+    if(!root)
+        return true;
+    return checkSymmetry(root.left, root.right)
+    
+};
+
+function checkSymmetry(left, right){
+    console.log(`left is ${left? left.val: undefined} and right is ${right ? right.val: undefined}`);
+    if(!left && !right)
+        return true;
+    else if(!left || !right)
+        return false;
+    if(left.val != right.val)
+        return false;
+    return checkSymmetry(left.left, right.right) && checkSymmetry(left.right, right.left)
+}
+
+//Maximum SubArray Problem
+//Given an integer array nums, find the contiguous subarray (containing at least one number)
+// which has the largest sum and return its sum.
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    if(nums.length === 1)
+        return nums[0]
+    let maxSum = -Infinity;
+    let sum = 0;
+    nums.forEach( (num, index) => {
+        sum = num;
+        if(sum > maxSum)
+            maxSum = sum;
+        for(let i = index + 1; i < nums.length; i++){
+            sum += nums[i];
+            if(sum > maxSum)
+                maxSum = sum;
+        }
+    })
+    //Checking if the last element alone is greater than maxSum
+    if(nums[nums.length - 1] > maxSum)
+        maxSum = nums[nums.length - 1]
+    return maxSum;
+};
+
+//O(n2) ^^^^^^
+//Kadane's Algorithm to solve the maximum SubArray Problem
+var maxSubArrayKadane = function(nums) {
+    let maxCurr = nums[0], maxGlobal = nums[0];
+    for(let i = 1; i < nums.length; i++){
+        maxCurr = Math.max(nums[i], nums[i] + maxCurr)
+        if(maxCurr > maxGlobal)
+            maxGlobal = maxCurr
+    }
+    return maxGlobal;
+}
