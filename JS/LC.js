@@ -334,3 +334,32 @@ var maxSubArrayKadane = function(nums) {
     }
     return maxGlobal;
 }
+
+//Given a non-empty array of integers, every element appears twice except for one.
+// Find that single one.
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+    nums.sort((a, b) => {
+        if(a > b)
+            return 1;
+        return -1;
+    })
+    for(let i = 0; i < nums.length; i += 2){
+        if(nums[i] !== nums[i + 1])
+            return nums[i];
+    }
+ };
+
+ //O(nlogn) ^^^^^^^^^^^^^
+ //O(n) solution
+ var singleNumber = function(nums) {
+    let result = new Map(); //Can use Either Map or Set
+    nums.forEach(num => {
+        if(!result.delete(num))
+            result.set(num, 1)
+    })
+    return [...result.keys()][0];
+}
