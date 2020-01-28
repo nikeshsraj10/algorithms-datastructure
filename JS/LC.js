@@ -364,7 +364,7 @@ var singleNumber = function(nums) {
     return [...result.keys()][0];
 }
 
-//Given a non-empty array of integers, every element appears twice except for one.
+//Given a non-empty array of integers, every element appears thrice except for one.
 // Find that single one.
 var getSingleNumber = function(nums) {
     nums.sort((a, b) => {
