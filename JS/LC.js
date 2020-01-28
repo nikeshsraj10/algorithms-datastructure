@@ -363,3 +363,30 @@ var singleNumber = function(nums) {
     })
     return [...result.keys()][0];
 }
+
+//Given a non-empty array of integers, every element appears twice except for one.
+// Find that single one.
+var getSingleNumber = function(nums) {
+    nums.sort((a, b) => {
+        if(a > b)
+            return 1;
+        return -1;
+    })
+    for(let i = 0; i < nums.length; i += 3){
+        if(nums[i] !== nums[i + 1])
+            return nums[i];
+    }
+ };
+let getSingleNumMap = function(arr){
+    let map = new Map()
+    arr.forEach(num => {
+        if(map.has(num)){
+            if(map.get(num) == 1)
+                map.set(num, 2)
+            else if(map.get(num) == 2)
+                map.delete(num)
+        }
+        else
+            map.set(num, 1)
+    })
+}
