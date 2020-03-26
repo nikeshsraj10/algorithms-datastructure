@@ -1,0 +1,93 @@
+//HW5  AVL Tree
+//Due: Friday (Nov. 8) at 11:59PM
+//55 points
+//This homework requires more efforts. You should get started as soon as possible.
+
+#include <iostream> //to use cout
+#include <algorithm> //to use max function such as  i = max(a, b);
+
+using namespace std;
+
+//You need to use the following node class for each node of the AVL tree
+class node {
+public:
+	int value;
+	int height;//this is tree height. Leaf node is 1; empty node (i.e., NIL) is 0
+	node * parent;
+	node * l_child;
+	node * r_child;
+	node() {}
+	node(int i) { value = i; height = 1; parent = l_child = r_child = nullptr; }
+
+};
+
+class avl_tree {
+public:
+	node * root;
+	avl_tree() {
+		root = nullptr;
+	}
+
+	//************************************************************************************
+	//Implement the following member functions
+	void add_node(int i);
+	//if case of a tie, add i to the last of existing nodes with value i in the in-order sequence
+
+	void delete_node(int i);
+	//Delete the node with value i.  in case of multiple nodes with value i, delete the first node with value i in the in-order traveral sequence
+
+
+	void in_order_traversal(node *p); //such as 2 5 9 11 11 14 15 15 ...
+
+	pair<node *, int> height_update(node *p);
+	/*
+	This function will be invoked by add_node and delete_node.
+	p points to the first node that we need to check for possible height update.  We then need to check possible height update toward root.
+	All nodes whose heights need to be updated will be performed in this function.
+	The function returns a pair.  If no imbalance is detected, the first of the pair will be nullptr; otherwise it will be the address of the action node.
+	The second of the pair will be 0 if no imbalance is detected; otherwise its value is 1,2,3,4 for RR RL, LL, and LR pattern, respectively.
+	*/
+
+	void L_Rotate(node *p);
+	//p points to the node at which the rotation will be performed.
+
+	void R_Rotate(node *p); 
+	//p points to the node at which the rotation will be performed.
+};
+
+
+
+int main() {
+//Different test cases will be used during grading.
+	avl_tree t1;
+	t1.add_node(45);
+	t1.in_order_traversal(t1.root);
+	t1.delete_node(45);
+	t1.in_order_traversal(t1.root);
+	t1.add_node(50);
+	t1.add_node(46);
+	t1.add_node(30);
+	t1.add_node(34);
+	t1.in_order_traversal(t1.root);
+	t1.delete_node(48);
+	t1.in_order_traversal(t1.root);
+	getchar();
+	getchar();
+	return 0;
+}
+
+//The following is an example showing how to return a pair.
+/*
+#include <iostream>
+using namespace std;
+
+pair<int *, int> f1(){
+	return { new int {10}, 10 };
+}
+int main() {
+	cout << *f1().first << " " << f1().second << endl;
+	getchar();
+	getchar();
+	return 0;
+}
+*/
