@@ -25,10 +25,9 @@ var isHappy = function(n) {
             if(newNum == 1)
                 return true;
             else if(set.has(+newNum))
-                return false;
+                return false; //Cycle detected so return false
             else
-                set.add(+newNum);
-            
+                set.add(+newNum);   //Add newNum to set
         }
     }
 
